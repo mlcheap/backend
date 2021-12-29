@@ -1,0 +1,1 @@
+from .CompareLabel import Compare

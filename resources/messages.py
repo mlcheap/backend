@@ -1,0 +1,12 @@
+class Message:
+    REQUEST_MUST_BE_JSON_MESSAGE = "missing JSON in request"
+    SUCCESS_MESSAGE = "successful"
+    FAILED_MESSAGE = "failed"
+    EXPIRATION_TOKEN_MESSAGE = "The token has expired"
+    MISSING_MESSAGE = "missing {} parameter"
+    WRONG_LOGIN_MESSAGE = "email or password is wrong"
+    EMAIL_EXIST_MESSAGE = "email address already exists"
+    EXIST_MESSAGE = "{} already exists"
+    USER_NOT_EXIST_MASSAGE = "user not exists"
+    UN_PERMITTED_MESSAGE = "you not have permission"
+    PROJECT_NOT_EXIST = "project not exist"

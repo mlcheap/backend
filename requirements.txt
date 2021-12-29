@@ -1,0 +1,8 @@
+Flask~=2.0.1
+requests~=2.25.1
+Werkzeug~=2.0.1
+redis~=3.5.3
+pymongo~=3.11.4
+flask-sieve~=2.0.1
+Flask-RESTful==0.3.9
+Flask-JWT-Extended==4.2.3
