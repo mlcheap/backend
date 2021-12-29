@@ -5,7 +5,7 @@ from flask_restful import Api
 from _env import VERSION
 
 blacklist = set()
-version_prefix = f'/api/{VERSION}'
+version_prefix = f'/api/api/{VERSION}'
 cwd = os.getcwd()
 
 
