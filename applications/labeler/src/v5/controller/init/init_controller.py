@@ -10,7 +10,7 @@ from .....app import VERSION
 
 def add_icon(projects):
     for project in projects:
-        project['icon'] = f'{request.url_root}/{VERSION}/file/icon?project_id={str(project["_id"])}'
+        project['icon'] = f'{request.url_root}{VERSION}/file/icon?project_id={str(project["_id"])}'
 
     return projects
 
