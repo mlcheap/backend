@@ -45,12 +45,13 @@ def set_labels_tasks_process(labeler_id, project_id, task, buffer_ids, skipped_i
     if not project:
         return send_bad_res()
     labels_per_task = project["labels_per_task"]
-    if task == {}:
+
+    task_id = task['task_id']
+
+    labels = task['labels']
+    if len(labels) == 0 and len(skipped_ids) > 0:
         skip_task(project_id, labeler_id, skipped_ids[0])
     else:
-        task_id = task['task_id']
-
-        labels = task['labels']
         if 'meta-labels' in task:
             meta_labels = task['meta-labels']
         else:
