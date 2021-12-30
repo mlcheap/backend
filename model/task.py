@@ -124,11 +124,13 @@ def add_to_skipped_tasks(project_id, labeler_id, task_id):
     task = task_db.find_one({'_id': ObjectId(task_id)})
 
     if SKIPPERS not in task:
-        task[SKIPPERS] = []
+        skippers = []
+    else:
+        skippers = task[SKIPPERS]
     if labeler_id not in task[SKIPPERS]:
-        task[SKIPPERS].append(labeler_id)
+        skippers.append(str(labeler_id))
 
-    task_db.update_one({'_id': task_id}, {'$set': {SKIPPERS: task[SKIPPERS]}})
+    task_db.update_one({'_id': ObjectId(task_id)}, {'$set': {SKIPPERS: skippers}})
 
 
 def get_new_tasks_from_db(project_id, labeler_id, buffer_size, buffer_ids, skipped_ids, total_remain_tasks):
