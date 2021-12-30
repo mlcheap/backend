@@ -8,7 +8,7 @@ def get_class_process(labeler_id,
                       project_id,
                       class_id):
     project = find_project_by_id(project_id)
-    lang = project['lang']
+    # lang = project['lang']
     labeler = find_labeler_by_id(labeler_id)
     customer_id = project["customer_id"]
     active_labelers, deactivated_labelers = all_labelers_in_project(customer_id, project_id)
