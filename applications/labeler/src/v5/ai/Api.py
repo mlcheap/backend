@@ -13,7 +13,7 @@ class Api:
         self.api_key = api_key
         self._auth = (self.api_key, "")
         self.version = version
-        self.base_api_url = api_instance_url if api_instance_url else LABELER_BASE_URL
+        self.base_api_url = api_instance_url if api_instance_url else MODEL_BASE_URL
         self._headers = {
             "Content-Type": "application/json",
             "token": api_key,
@@ -90,7 +90,6 @@ class Api:
         """Generic HTTP request method with error handling."""
 
         url = f"{self.base_api_url}/{endpoint}"
-        print("url", url)
 
         res = self._http_request(method, url, headers, auth, params, body, files, data)
         # json = None

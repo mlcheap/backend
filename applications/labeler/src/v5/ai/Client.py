@@ -7,7 +7,7 @@ from .env import *
 class Client:
     def __init__(self,
                  api_key):
-        self.api = Api(api_key=api_key, api_instance_url=LABELER_BASE_URL)
+        self.api = Api(api_key=api_key, api_instance_url=MODEL_BASE_URL)
 
     def predict(self,  task_dic):
         return self.api.post_request(f'top-tags', body=task_dic)
