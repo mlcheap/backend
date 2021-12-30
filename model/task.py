@@ -119,6 +119,11 @@ def find_task_by_id(project_id, task_id):
 
 def get_new_tasks_from_db(project_id, labeler_id, buffer_size, buffer_ids, skipped_ids, total_remain_tasks):
     task_db = get_task_col(project_id)
+    print("task_db",list(task_db.find({'_id': {'$nin': [ObjectId(_id) for _id in buffer_ids + skipped_ids]},
+                               'status': {'$in': [IN_PROGRESS, PENDING]},
+                               'total_labels': {'$lt': buffer_size},
+                               'labelers': {'$nin': [labeler_id]}
+                               }).sort('total_labels')))
     tasks = list(task_db.find({'_id': {'$nin': [ObjectId(_id) for _id in buffer_ids + skipped_ids]},
                                'status': {'$in': [IN_PROGRESS, PENDING]},
                                'total_labels': {'$lt': buffer_size},

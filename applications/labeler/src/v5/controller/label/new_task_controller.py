@@ -42,7 +42,7 @@ def convert_tasks_front_format(tasks):
 
 def get_new_tasks(project_id, labeler_id, buffer_size, skipped_ids, buffer_ids):
     total_remain_tasks = buffer_size - len(buffer_ids)
-
+    print("total_remain_tasks", total_remain_tasks)
     tasks = get_new_tasks_from_db(project_id, str(labeler_id), buffer_size, buffer_ids, skipped_ids,
                                   total_remain_tasks)
     project = find_project_by_id(project_id)
