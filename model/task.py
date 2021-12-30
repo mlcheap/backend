@@ -121,7 +121,7 @@ def find_task_by_id(project_id, task_id):
 
 def add_to_skipped_tasks(project_id, labeler_id, task_id):
     task_db = get_task_col(project_id)
-    task = task_db.find_one({'_id': task_id})
+    task = task_db.find_one({'_id': ObjectId(task_id)})
 
     if SKIPPERS not in task:
         task[SKIPPERS] = []
