@@ -11,18 +11,13 @@ def req_ml_server(model_id, task, excludes):
     client = Client(LABELER_TEST_API)
     data = task["items"][0]["data"]
 
-    print({
+    response = client.predict({
         "id": model_id,
         "description": data['description'],
         "title": data["title"],
         "exclude_indices": excludes})
-    # response = client.predict({
-    #     "id": model_id,
-    #     "description": data['description'],
-    #     "title": data["title"],
-    #     "exclude_indices": excludes})
-    # return response
-    return {}
+    return response
+
 
 def ai_predict_process(labeler_id,
                        project_id,
