@@ -6,6 +6,8 @@ from model.cache.basic import get_labeler_waiting_tasks, count_labeler_mailbox, 
 from model.utils import get_task_col
 from model.consts import PENDING, IN_PROGRESS, COMPLETE, CANCELED
 
+SKIPPERS = "skippers"
+
 
 def create_task(customer_id, project_id, callbacks, task_dic, unique_id):
     created_at = updated_at = datetime.datetime.utcnow()
@@ -117,17 +119,23 @@ def find_task_by_id(project_id, task_id):
     return task_db.find_one({"_id": ObjectId(task_id)})
 
 
+def add_to_skipped_tasks(project_id, labeler_id, task_id):
+    task_db = get_task_col(project_id)
+    task = task_db.find_one({'_id': task_id})
+
+    if SKIPPERS not in task:
+        task[SKIPPERS] = []
+    if labeler_id not in task[SKIPPERS]:
+        task[SKIPPERS].append(labeler_id)
+
+    task_db.update_one({'_id': task_id}, {'$set': {SKIPPERS: task[SKIPPERS]}})
+
+
 def get_new_tasks_from_db(project_id, labeler_id, buffer_size, buffer_ids, skipped_ids, total_remain_tasks):
     task_db = get_task_col(project_id)
-    print("labeler_id", labeler_id)
-    print("task_db not labeler_id", list(task_db.find({'_id': {'$nin': [ObjectId(_id) for _id in buffer_ids + skipped_ids]},
-                               'total_labels': {'$lt': buffer_size},
-                               'labelers': {'$nin': [labeler_id]}
-                               }).sort('total_labels')))
-    # print("task_db",list(task_db.find({'_id': {'$nin': [ObjectId(_id) for _id in buffer_ids + skipped_ids]},
-    #                            }).sort('total_labels')))
     tasks = list(task_db.find({'_id': {'$nin': [ObjectId(_id) for _id in buffer_ids + skipped_ids]},
                                'status': {'$in': [IN_PROGRESS, PENDING]},
+                               SKIPPERS: {"$nin": [labeler_id]},
                                'labelers': {'$nin': [labeler_id]}
                                }).sort('total_labels').limit(total_remain_tasks))
     for task in tasks:
@@ -162,7 +170,9 @@ def get_project_total_labeled_labeler(project_id, labeler_id):
 
 def get_project_total_remain_labeler(project_id, labeler_id):
     task_db = get_task_col(project_id)
-    return task_db.count({'labelers': {"$nin": [labeler_id]}, 'status': {"$nin": [COMPLETE, CANCELED]}})
+    return task_db.count({'labelers': {"$nin": [labeler_id]},
+                          'status': {"$nin": [COMPLETE, CANCELED]},
+                          SKIPPERS: {"$nin": [labeler_id]}})
 
 
 def get_project_total_tasks_labeled(project_id):

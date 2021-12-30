@@ -1,6 +1,6 @@
 from consts import BAD_REQUEST_CODE, OK_CODE, SUCCESS_MESSAGE, FAILED_MESSAGE
 from model.project import get_buffer_size, get_labeler_allowed_project, find_project_by_id
-from model.task import get_new_tasks_from_db, get_labeler_project_stat, update_ml_task
+from model.task import get_new_tasks_from_db, get_labeler_project_stat, update_ml_task, add_to_skipped_tasks
 from model.quality import get_quality
 from model.project import get_quality_treshhold
 from model.labeler import find_labeler_by_id
@@ -48,13 +48,18 @@ def get_new_tasks(project_id, labeler_id, buffer_size, skipped_ids, buffer_ids):
     project = find_project_by_id(project_id)
     for task in tasks:
         if "model_id" in project and project["model_id"] != "":
-            task['items'][1]['meta-label']["ai"] = ai_predict_process(labeler_id, project_id, str(task["_id"]), excludes=[])
+            task['items'][1]['meta-label']["ai"] = ai_predict_process(labeler_id, project_id, str(task["_id"]),
+                                                                      excludes=[])
     tasks_front_format = convert_tasks_front_format(tasks)
     stat = get_labeler_project_stat(project_id, str(labeler_id))
     if len(tasks_front_format) == 0:
         return [], stat, SUCCESS_MESSAGE, OK_CODE
 
     return tasks_front_format, stat, SUCCESS_MESSAGE, OK_CODE
+
+
+def skip_task(project_id, labeler_id, task_id):
+    add_to_skipped_tasks(project_id, labeler_id, task_id)
 
 
 def new_task_process(project_id, labeler_id, buffer_ids, skipped_ids, lang):
