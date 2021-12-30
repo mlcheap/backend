@@ -127,7 +127,7 @@ def add_to_skipped_tasks(project_id, labeler_id, task_id):
         skippers = []
     else:
         skippers = task[SKIPPERS]
-    if labeler_id not in task[SKIPPERS]:
+    if labeler_id not in skippers:
         skippers.append(str(labeler_id))
 
     task_db.update_one({'_id': ObjectId(task_id)}, {'$set': {SKIPPERS: skippers}})
