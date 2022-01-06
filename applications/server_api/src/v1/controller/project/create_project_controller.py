@@ -6,10 +6,13 @@ from consts.consts import OK_CODE, SUCCESS_MESSAGE, BAD_REQUEST_CODE, FAILED_MES
 
 def create_project_process(project_name, customer_token, labels_per_task, icon_id, metadata, model_id):
     customer = find_customer_by_token(customer_token)
+    print('salam')
     if customer:
+        print("customer")
         customer_id = str(customer["_id"])
         project_id = create_project(project_name, customer_id, labels_per_task, icon_id, metadata, model_id)
         # cache_create_project(project_name, customer_id, labels_per_task)
+        print("okey code")
         return OK_CODE, SUCCESS_MESSAGE, project_id
     else:
         print(BAD_REQUEST_CODE, "back request")
