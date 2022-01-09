@@ -5,7 +5,7 @@ from flask_restful import Api
 from _env import VERSION
 
 blacklist = set()
-version_prefix = f'/{VERSION}'
+version_prefix = f'/api/{VERSION}'
 cwd = os.getcwd()
 
 
@@ -44,17 +44,9 @@ if __name__ == "__main__":
         return request.path
 
 
-    @app.after_request
-    def after_request(response):
-        # response.headers.add('Access-Control-Allow-Origin', '*')
-        # response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
-        # response.headers.add('Access-Control-Allow-Headers', '*')
-        # response.headers.add('Access-Control-Allow-Methods', "*")
-        # response.headers.add("Access-Control-Allow-Origin", "*")
-        # response.headers.add("Access-Control-Allow-Headers", "*")
-        # response.headers.add("Access-Control-Allow-Methods", "*")
-
-        return response
+    @app.errorhandler(Exception)
+    def all_exception_handler(error):
+        return error.response()
 
 
     app.run(host='0.0.0.0', port=5100, debug=True, threaded=True)

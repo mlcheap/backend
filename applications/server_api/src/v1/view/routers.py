@@ -4,6 +4,7 @@ from ..view.file import UploadFile, ImportFile, DownloadFile
 from ..view.tasks import CreateTask, GetTask, GetTasks, GetTasksCount, CancelTask
 from ..view.labeler import AddLabeler, CancelLabeler, AllLabelers
 from ..view.classes import GetClasses, GetClass, CreateClass, CreateClasses
+from ..view.token import GetToken
 
 
 def initialize_routes(api: flask_restful.Api):
@@ -26,3 +27,4 @@ def initialize_routes(api: flask_restful.Api):
     api.add_resource(AddLabeler, '/add-labelers')
     api.add_resource(CancelLabeler, '/cancel-labeler')
     api.add_resource(AllLabelers, '/all-labelers')
+    api.add_resource(GetToken, '/get-token')

@@ -30,6 +30,13 @@ def update_task_labels(project_id, labeler_id, task_id, labels, meta_labels, lab
             'label_time': label_time}})
 
 
+def find_labeler_labeled_tasks_base_time(labeler_id, project_id, _from, to):
+    label_col = get_label_col(project_id)
+    labels = label_col.find({'labeler_id': labeler_id,
+                             'inserted_at': {'$gt': _from, '$lt': to}})
+    return list(labels)
+
+
 def exist_label(project_id, labeler_id, item_id):
     label_col = get_label_col(project_id)
     return label_col.count({'labeler_id': labeler_id, 'task_id': item_id})

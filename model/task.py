@@ -67,6 +67,9 @@ def find_tasks(project_id, completed_before, completed_after,
                                            'total_labels': 1, 'task-type': 1, 'status': 1})
 
 
+
+
+
 def count_tasks(project_id, completed_before, completed_after,
                 created_after, created_before,
                 status):
