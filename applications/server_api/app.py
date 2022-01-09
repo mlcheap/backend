@@ -3,10 +3,12 @@ from _env import MONGO_URI, REDIS_HOST, REDIS_PORT
 from flask import Flask, Blueprint, request
 import redis
 from flask_restful import Api
+import os
 
+MO_URL = os.getenv('MONGO_URL') or MONGO_URI
 VERSION1 = "v1"
 version_prefix1 = f'/{VERSION1}'
-db = MongoClient(MONGO_URI)['labeler']
+db = MongoClient(MO_URL)['labeler']
 rdb = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT)
 
 

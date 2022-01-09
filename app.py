@@ -5,8 +5,11 @@ from applications.labeler.app import create_app as create_labeler_app
 from applications.server_api.app import create_app as create_api_app
 from dispatcher import SubdomainDispatcher
 from werkzeug.serving import run_simple
+import os
 
-db = MongoClient(MONGO_URI)['labeler']
+MO_URL = os.getenv('MONGO_URL') or MONGO_URI
+
+db = MongoClient(MO_URL)['labeler']
 rdb = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT)
 
 
