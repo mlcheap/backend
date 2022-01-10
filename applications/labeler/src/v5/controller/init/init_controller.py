@@ -6,11 +6,13 @@ from model.task import get_labeler_project_stat
 from model.labeler import find_labeler_by_id, get_total_rank, get_total_score
 from flask import request
 from .....app import VERSION
+import os
 
 
 def add_icon(projects):
     for project in projects:
-        project['icon'] = f'https://label.mlcheap.com/api/{VERSION}/file/icon?project_id={str(project["_id"])}'
+        front_url = os.getenv('FRONT_URL') or "https: // label.mlcheap.com"
+        project['icon'] = f'{front_url}/api/{VERSION}/file/icon?project_id={str(project["_id"])}'
 
     return projects
 
