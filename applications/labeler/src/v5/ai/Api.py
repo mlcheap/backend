@@ -89,7 +89,7 @@ class Api:
     ):
         """Generic HTTP request method with error handling."""
 
-        url = f"{self.base_api_url}/{endpoint}"
+        url = f"http://{self.base_api_url}/{endpoint}"
 
         res = self._http_request(method, url, headers, auth, params, body, files, data)
         # json = None
