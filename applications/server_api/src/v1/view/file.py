@@ -40,7 +40,7 @@ class ImportFile(Resource):
 class DownloadFile(Resource):
     def get(self):
         token = request.headers["token"]
-        print("token", token)
+        # print("token", token)
         file_id = request.args.get("file-id")
         file_path, mimetype = download_file_process(token, file_id)
         return send_file(file_path, mimetype='image/gif')

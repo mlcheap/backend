@@ -8,13 +8,14 @@ from applications.labeler.src.v5.ai.Client import Client
 def req_ml_server(model_id, title, description, excludes):
     LABELER_TEST_API = 'e2fcd22b-4c71-4c37-a140-39835933edbe'
 
-    client = Client(LABELER_TEST_API)
-
+    client = Client(api_key=LABELER_TEST_API,)
+    # print(model_id)
     response = client.predict({
         "id": model_id,
         "description": description,
         "title": title,
-        "exclude_indices": excludes})
+        "exclude_indices": []})
+    # print(response)
     return response
 
 

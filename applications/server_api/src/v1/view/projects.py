@@ -49,7 +49,7 @@ class GetAllProjects(Resource):
     def get(self):
         token = request.headers["token"]
         try:
-            print('get all p roject', token)
+            # print('get all p roject', token)
             projects = get_all_projects_process(token)
             return generate_api_response(data={"projects": projects},
                                          response_class=GetAllProjectsResource)

@@ -10,7 +10,7 @@ def create_classes_process(token,
     customer = find_customer_by_token(token)
     if not project or project["customer_id"] != str(customer["_id"]):
         message = "there is no project"
-        print(message)
+        # print(message)
         return False, message, []
 
     customer_id = str(customer["_id"])

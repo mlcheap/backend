@@ -3,11 +3,12 @@ from ..Resources.BaseResource import BaseResource
 
 class CreateTaskResource(BaseResource):
     def label_serializer(self, label):
-        print(label)
+        # print(label)
         return {"labeler_id": label['labeler_id'],
                 'task_id': label['task_id'],
                 'labels': label['labels'],
                 'label_time': label['label_time'],
+                'inserted_at':label['inserted_at'],
                 'lang': label['lang']}
 
     def to_dict(self):

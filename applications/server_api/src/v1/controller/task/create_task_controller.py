@@ -12,7 +12,7 @@ def create_task_process(token, project_id, callback, task_type, items, unique_id
     customer = find_customer_by_token(token)
     if not project or project["customer_id"] != str(customer["_id"]):
         message = "there is no project"
-        print(message)
+        # print(message)
         return False, message, []
 
     task_obj = task_parser(task_type, items)

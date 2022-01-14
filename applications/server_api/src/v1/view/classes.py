@@ -68,7 +68,7 @@ class GetClasses(Resource):
         classes = get_classes_process(token, project_id)
         if not classes:
             classes = []
-        print(classes)
+        # print(classes)
         return generate_api_response(data={"classes": classes},
                                      response_class=GetClassesResource)
 

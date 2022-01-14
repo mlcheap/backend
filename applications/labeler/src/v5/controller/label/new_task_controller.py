@@ -33,7 +33,7 @@ def have_condition(project_name, user_id):
 def convert_tasks_front_format(tasks):
     tasks_front_format = []
     for task in tasks:
-        print('task', task['items'][1]['meta-label'])
+        # print('task', task['items'][1]['meta-label'])
         tff = task_parser(task['task-type'], task['items']).to_dict()
         tff.update({"task_id": str(task["_id"]), 'skip_able': False})
         tasks_front_format.append(tff)
@@ -48,8 +48,8 @@ def get_new_tasks(project_id, labeler_id, buffer_size, skipped_ids, buffer_ids):
     for task in tasks:
         if "model_id" in project and project["model_id"] != "":
             data = task['items'][0]['data']
-            print('title', str(data["title"]))
-            print('description', str(data["description"]))
+            # print('title', str(data["title"]))
+            # print('description', str(data["description"]))
             task['items'][1]['meta-label']["ai"] = ai_predict_process(labeler_id, project_id, str(data["title"]),
                                                                       str(data["description"]),
                                                                       excludes=[])

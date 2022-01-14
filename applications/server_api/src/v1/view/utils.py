@@ -22,7 +22,7 @@ def validate_json(Request):
         @wraps(fn)
         def wrapper(*args, **kwargs):
             req = Request()
-            print(req)
+            # print(req)
             if not request.is_json:
                 raise ValidJsonException
 

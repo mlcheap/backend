@@ -96,7 +96,7 @@ def get_skipped_by_other_users(project_name, labeler_id, total_task):
 def get_exist_tasks(project_name, seed, total_need_tasks):
     tasks = []
     total_unlabeled = get_total_unlabeled_tasks(project_name, seed)
-    print("total_remain", total_unlabeled, total_need_tasks)
+    # print("total_remain", total_unlabeled, total_need_tasks)
     for i in range(min(total_unlabeled, total_need_tasks)):
         tasks.append(pop_task(project_name, seed).decode("utf-8"))
     return tasks

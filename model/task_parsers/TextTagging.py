@@ -12,7 +12,7 @@ class TextTagging(Task):
 
     def __pars_item__(self, item):
         item_obj = None
-        print(item)
+        # print(item)
         if item['name'] == TEXT and item['type'] == "data":
             item_obj = get_data_class(TEXT)()
             item_obj.pars_json(item)
