@@ -67,9 +67,6 @@ def find_tasks(project_id, completed_before, completed_after,
                                            'total_labels': 1, 'task-type': 1, 'status': 1})
 
 
-
-
-
 def count_tasks(project_id, completed_before, completed_after,
                 created_after, created_before,
                 status):
@@ -180,6 +177,12 @@ def get_project_total_remain_labeler(project_id, labeler_id):
                           SKIPPERS: {"$nin": [labeler_id]}})
 
 
+def get_project_total_skipped_labeler(project_id, labeler_id):
+    task_db = get_task_col(project_id)
+    return task_db.count({'labelers': {"$nin": [labeler_id]},
+                          SKIPPERS: {"$in": [labeler_id]}})
+
+
 def get_project_total_tasks_labeled(project_id):
     task_db = get_task_col(project_id)
     return task_db.count({"status": {"$nin": [PENDING, CANCELED]}})
@@ -202,7 +205,8 @@ def get_project_total_canceled_tasks(project_id):
 
 def get_labeler_project_stat(project_id, labeler_id):
     return {'total_labeled': get_project_total_labeled_labeler(project_id, labeler_id),
-            'total_remain': get_project_total_remain_labeler(project_id, labeler_id)}
+            'total_remain': get_project_total_remain_labeler(project_id, labeler_id),
+            'total_skipped': get_project_total_skipped_labeler(project_id, labeler_id)}
 
 
 def get_project_stat(project_id):

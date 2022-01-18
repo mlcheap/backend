@@ -52,7 +52,7 @@ def cancel_class(project_id,
 
 def find_classes(project_id):
     class_db = get_class_col(project_id)
-    return class_db.find({}, {"name": 1})
+    return class_db.find({})
 
 
 def count_classes(project_id):

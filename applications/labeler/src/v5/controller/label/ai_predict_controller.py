@@ -3,13 +3,14 @@ from model.task import find_task
 from model.labeler import all_labelers_in_project, find_labeler_by_id
 from resources.helpers import Status, Message
 from applications.labeler.src.v5.ai.Client import Client
+import os
 
 
 def req_ml_server(model_id, title, description, excludes):
     LABELER_TEST_API = 'e2fcd22b-4c71-4c37-a140-39835933edbe'
 
-    client = Client(api_key=LABELER_TEST_API,)
-    # print(model_id)
+    client = Client(api_key=LABELER_TEST_API, )
+
     response = client.predict({
         "id": model_id,
         "description": description,

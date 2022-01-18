@@ -7,7 +7,6 @@ from model.classes import find_classes
 def get_all_classes_process(labeler_id,
                             project_id):
     project = find_project_by_id(project_id)
-    # print(project)
     # lang = project['lang']
     labeler = find_labeler_by_id(labeler_id)
     customer_id = project["customer_id"]

@@ -48,9 +48,9 @@ def get_new_tasks(project_id, labeler_id, buffer_size, skipped_ids, buffer_ids):
     for task in tasks:
         if "model_id" in project and project["model_id"] != "":
             data = task['items'][0]['data']
-            # print('title', str(data["title"]))
-            # print('description', str(data["description"]))
-            task['items'][1]['meta-label']["ai"] = ai_predict_process(labeler_id, project_id, str(data["title"]),
+            task['items'][1]['meta-label']["ai"] = ai_predict_process(labeler_id,
+                                                                      project_id,
+                                                                      str(data["title"]),
                                                                       str(data["description"]),
                                                                       excludes=[])
     tasks_front_format = convert_tasks_front_format(tasks)
