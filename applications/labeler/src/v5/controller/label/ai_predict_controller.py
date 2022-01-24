@@ -15,7 +15,7 @@ def req_ml_server(model_id, title, description, excludes):
         "id": model_id,
         "description": description,
         "title": title,
-        "exclude_indices": []})
+        "excluds": excludes})
     # print(response)
     return response
 
@@ -23,9 +23,9 @@ def req_ml_server(model_id, title, description, excludes):
 def ai_predict_process(labeler_id,
                        project_id,
                        title, description,
-                       excludes):
+                       excluds):
     project = find_project_by_id(project_id)
     labeler = find_labeler_by_id(labeler_id)
     customer_id = project["customer_id"]
     active_labelers, deactivated_labelers = all_labelers_in_project(customer_id, project_id)
-    return req_ml_server(project["model_id"], title, description, excludes)
+    return req_ml_server(project["model_id"], title, description, excluds)
