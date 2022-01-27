@@ -14,13 +14,13 @@ class Ai(Resource):
         lang = request.args.get('lang')
         req = request.get_json()
 
-        project_id, title, description,excluds = \
-            req['project_id'], req['title'],req['description'], req["excluds"]
+        project_id, title, description,exclude_indices = \
+            req['project_id'], req['title'],req['description'], req["exclude_indices"]
 
         user_id = get_jwt_identity()
 
         labels = ai_predict_process(user_id,
                                     project_id,
                                     title, description,
-                                    excluds)
+                                    exclude_indices)
         return generate_api_response({'labels': labels})

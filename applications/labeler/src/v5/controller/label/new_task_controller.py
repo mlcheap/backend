@@ -52,7 +52,7 @@ def get_new_tasks(project_id, labeler_id, buffer_size, skipped_ids, buffer_ids):
                                                                       project_id,
                                                                       str(data["title"]),
                                                                       str(data["description"]),
-                                                                      excluds=[])
+                                                                      exclude_indices=[])
     tasks_front_format = convert_tasks_front_format(tasks)
     stat = get_labeler_project_stat(project_id, str(labeler_id))
     if len(tasks_front_format) == 0:
