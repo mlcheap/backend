@@ -6,7 +6,7 @@ from applications.labeler.src.v5.ai.Client import Client
 import os
 
 
-def req_ml_server(model_id, title, description, excludes):
+def req_ml_server(model_id, title, description, exclude_indices):
     LABELER_TEST_API = 'e2fcd22b-4c71-4c37-a140-39835933edbe'
 
     client = Client(api_key=LABELER_TEST_API, )
@@ -15,7 +15,7 @@ def req_ml_server(model_id, title, description, excludes):
         "id": model_id,
         "description": description,
         "title": title,
-        "excluds": excludes})
+        "exclude_indices": exclude_indices})
     # print(response)
     return response
 
@@ -23,9 +23,9 @@ def req_ml_server(model_id, title, description, excludes):
 def ai_predict_process(labeler_id,
                        project_id,
                        title, description,
-                       excluds):
+                       exclude_indices):
     project = find_project_by_id(project_id)
     labeler = find_labeler_by_id(labeler_id)
     customer_id = project["customer_id"]
     active_labelers, deactivated_labelers = all_labelers_in_project(customer_id, project_id)
-    return req_ml_server(project["model_id"], title, description, excluds)
+    return req_ml_server(project["model_id"], title, description, exclude_indices)
