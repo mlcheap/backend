@@ -10,7 +10,7 @@ def update_project_process(customer_token, project_id, new_project_conf):
 
     if project and project["customer_id"] == str(customer["_id"]):
         for key in new_project_conf:
-            if key not in ["labels_per_task", "icon_id", "project_name","model_id", "lang"]:
+            if key not in ["labels_per_task", "metadata", "icon_id", "project_name", "model_id", "lang"]:
                 return False
         return update_project(project, new_project_conf)
 
