@@ -17,3 +17,12 @@ class LoginRequest(JsonRequest):
             'password': ['required', 'string'],
             'email': ['required', 'string', 'email'],
         }
+
+
+class ResetPasswordRequest(JsonRequest):
+    def rules(self):
+        return {
+            'new-password': ['required', 'string'],
+            'access-token': ['required', 'string'],
+            'email': ['required', 'string', 'email'],
+        }

@@ -3,9 +3,9 @@ from flask_jwt_extended import jwt_required, unset_jwt_cookies
 from flask_restful import Resource
 from flask import jsonify
 from resources.helpers import generate_api_response
-from ..Requests.AuthRequest import RegisterRequest, LoginRequest
+from ..Requests.AuthRequest import RegisterRequest, LoginRequest, ResetPasswordRequest
 from ..Resources.LabelerResource import LabelerResource
-from ..controller.auth import login_process, signup_process
+from ..controller.auth import login_process, signup_process, reset_password_process
 from ..view.utils import validate_json
 from resources.errors import ApiException
 
@@ -21,6 +21,18 @@ class Signin(Resource):
             return e.response()
 
         return generate_api_response(data=user, response_class=LabelerResource, meta={'access_token': access_token})
+
+
+class ResetPassword(Resource):
+    @validate_json(ResetPasswordRequest)
+    def post(self):
+        try:
+            data = request.get_json()
+            user = reset_password_process(data['email'], data['new-password'], data['access-token'])
+        except ApiException as e:
+            return e.response()
+        return generate_api_response(data=user, response_class=LabelerResource,
+                                     meta={'new-password': data['new-password']})
 
 
 class Signup(Resource):

@@ -1,5 +1,5 @@
 import flask_restful
-from ..view.auth import Signin, Signup, Logout
+from ..view.auth import Signin, Signup, Logout, ResetPassword
 from ..view.init import Init
 from ..view.file import Image, Icon
 from ..view.label import LabelTask, NewTask, GetProject
@@ -12,6 +12,7 @@ def initialize_routes(api: flask_restful.Api):
     api.add_resource(Signin, '/auth/signin')
     api.add_resource(Signup, '/auth/signup')
     api.add_resource(Logout, '/auth/logout')
+    api.add_resource(ResetPassword, '/auth/reset-password')
 
     api.add_resource(Init, '/init')
 

@@ -53,6 +53,7 @@ def all_labelers_in_project(customer_id, project_id):
             deactivated_labelers = [serialize_labeler_by_email(email) for email in project['deactivated_labelers']]
     return active_labelers, deactivated_labelers
 
+
 def cancel_labeler_from_project(customer_id, project_id, email):
     project = find_project_by_id(project_id)
     if project and project["customer_id"] == customer_id:
@@ -84,6 +85,11 @@ def create_labeler(email, name, password, gender):
             'gender': gender,
             'password': generate_password_hash(password, method='sha256')}
     labelers_db.insert_one(user)
+
+
+def reset_password(email, new_password):
+    labelers_db.update_one({'email': email},
+                           {'$set': {'password': generate_password_hash(new_password, method='sha256')}})
 
 
 def find_labeler_id_by_email(email):
