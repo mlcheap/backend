@@ -12,5 +12,8 @@ class Client:
     def predict(self,  task_dic):
         return self.api.post_request(f'top-tags', body=task_dic)
 
+    def search(self, task_dic):
+        return self.api.post_request(f'search', body=task_dic)
+
     def get_class_info(self, lang, class_dic):
         return self.api.post_request(f'get-occupation', body=class_dic)
